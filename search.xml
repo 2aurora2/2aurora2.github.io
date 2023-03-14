@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>第一个微信小程序 —— PuppyHome</title>
+      <link href="/post/PuppyHome.html"/>
+      <url>/post/PuppyHome.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>最近一直忙着搞学校的icode比赛所以博客的更新就搁置了qwq，这个icode比赛我们是做一个小程序，而我是负责小程序的前端部分，这篇文章也是来记录一下第一次小程序的经历，技术性的东西估计不会讲太多，可能主要讲本项目如何使用腾讯云的COS对象存储以及一些开发中遇到的坑……</p><hr><h2 id="小程序介绍"><a href="#小程序介绍" class="headerlink" title="小程序介绍"></a>小程序介绍</h2><p>这个小程序是一个用来服务于修勾的平台，主要用户功能有发布、收藏、删除领养公告以及领养自己喜欢的修勾，以及本项目的一大亮点——“拍照识修勾”即用户拍照后平台进行分析得出相似度最高的修勾品种，当然这一困难part主要是后端方面的工作（还得靠勋哥写的后端&lt;膜拜.jpg&gt;）,而我就负责前端的部分，具体小程序以及前端代码的github地址会在项目结束后会放在文章的最后……</p><img src="/post/PuppyHome/introduce.jpg" class title="Layout-Introduce"><h2 id="开发实记"><a href="#开发实记" class="headerlink" title="开发实记"></a>开发实记</h2><p>待更新……</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发范畴 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> WxChatApp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>指针(Pointer)学习(上)(updating)</title>
       <link href="/post/Pointer.html"/>
       <url>/post/Pointer.html</url>
