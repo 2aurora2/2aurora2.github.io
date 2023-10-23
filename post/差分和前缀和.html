@@ -1,0 +1,325 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>差分和前缀和 | 煎bingo子 の 博客</title><meta name="author" content="煎bingo子"><meta name="copyright" content="煎bingo子"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="差分和前缀和的学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="差分和前缀和">
+<meta property="og:url" content="https://2aurora2.github.io/post/%E5%B7%AE%E5%88%86%E5%92%8C%E5%89%8D%E7%BC%80%E5%92%8C.html">
+<meta property="og:site_name" content="煎bingo子 の 博客">
+<meta property="og:description" content="差分和前缀和的学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://2aurora2.github.io/img/cover.png">
+<meta property="article:published_time" content="2023-01-26T13:29:06.000Z">
+<meta property="article:modified_time" content="2023-10-23T12:27:56.000Z">
+<meta property="article:author" content="煎bingo子">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="algorithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2aurora2.github.io/img/cover.png"><link rel="shortcut icon" href="/img/web_icon.png"><link rel="canonical" href="https://2aurora2.github.io/post/%E5%B7%AE%E5%88%86%E5%92%8C%E5%89%8D%E7%BC%80%E5%92%8C"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '差分和前缀和',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-10-23 20:27:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/source/css/custom.css"><script async src="https://npm.elemecdn.com/tzy-blog/lib/js/other/sakura.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">煎bingo子 の 博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout hide-aside" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">差分和前缀和</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-26T13:29:06.000Z" title="发表于 2023-01-26 21:29:06">2023-01-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-23T12:27:56.000Z" title="更新于 2023-10-23 20:27:56">2023-10-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95%E8%8C%83%E7%95%B4/">算法范畴</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="差分和前缀和"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>由于昨天学校OJ平台的一次训练赛中出现了一个前缀和差分的题目，本蒟蒻不太会T_T,所以打算系统学习一下前缀和差分的知识点。在文章的最后笔者也会放上那道题的题目以及AC代码。</p>
+<h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><hr>
+<h3 id="一维前缀和"><a href="#一维前缀和" class="headerlink" title="一维前缀和"></a>一维前缀和</h3><p>前缀和可以简单的理解为某个数组中前n项的和，是一种重要的预处理方式，能大大降低查询的时间复杂度。而一维的前缀和比较简单就不做过多的赘述，直接通过一个例子来了解：</p>
+<blockquote>
+<p>给定一个n个元素的数组，要求计算出q次查询中给定的区间的元素的和</p>
+</blockquote>
+<p>对于这个例子可能刚开始最简单的想法就是遍历每次查询的区间求和，但是这种做法在数组元素、查询次数足够多的情况下其时间复杂度就会很高，因此就要用到前缀和的思想。</p>
+<p>首先先定义一个数组sum[N]，sum[i]表示的是数组索引为0 - i的元素的和，然后假设查询的区间为[L , R]那么该区间和就为sum[R]-sum[L-1]（若L==0则区间和为sum[R]）</p>
+<blockquote>
+<p>sum[i]的值</p>
+</blockquote>
+<p>当i为0时，sum[i]=arr[0]；当i大于0时，sum[i]=sum[i-1]+arr[i]。</p>
+<p>下面是演示代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e4</span> + <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> arr[N], sum[N], n, q, l, r;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">		cin &gt;&gt; arr[i];</span><br><span class="line">	sum[<span class="number">0</span>] = arr[<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">		sum[i] = sum[i - <span class="number">1</span>] + arr[i];</span><br><span class="line">	cin &gt;&gt; q;</span><br><span class="line">	<span class="keyword">while</span> (q--)</span><br><span class="line">	&#123;</span><br><span class="line">		cin &gt;&gt; l &gt;&gt; r;</span><br><span class="line">		<span class="keyword">if</span> (l == <span class="number">0</span>) cout &lt;&lt; sum[r] &lt;&lt; endl;</span><br><span class="line">		<span class="keyword">else</span> cout &lt;&lt; sum[r] - sum[l - <span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<img src="/post/%E5%B7%AE%E5%88%86%E5%92%8C%E5%89%8D%E7%BC%80%E5%92%8C/1.png" class title="This is an example image">
+
+<h3 id="二维前缀和"><a href="#二维前缀和" class="headerlink" title="二维前缀和"></a>二维前缀和</h3><p>对于二维前缀和，其实就是类似求存储在某个二维数组中某个矩阵方块内的数组元素的和，下面以一个二维数组的例子来讲解</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">3</span>][<span class="number">4</span>]=&#123;</span><br><span class="line">    &#123;<span class="number">1</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>&#125;,</span><br><span class="line">    &#123;<span class="number">9</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">3</span>&#125;,</span><br><span class="line">    &#123;<span class="number">5</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>同样先定义一个二维数组sum，sum[ i ] [ j ]的意义为以(0,0)为左上角，(i , j)为右下角构成的矩阵所包含的元素的和（以例子中的二维数组为例，sum[1] [2]就是元素1、5、6、9、6、7元素的和）；那么假设所要查询的矩阵是以(x<sub>1</sub>,y<sub>1</sub>)、(x<sub>2</sub>,y<sub>2</sub>)分别为左上角的点和右下角的点构成的，设查询的结果为sum{x<sub>1</sub>,y<sub>1</sub>}{x<sub>2</sub>,y<sub>2</sub>}，以下图为例来说，sum{x<sub>1</sub>,y<sub>1</sub>}{x<sub>2</sub>,y<sub>2</sub>}的结果就是sum[ x<sub>2</sub> ] [ y<sub>2</sub> ]的值减去蓝色框内的再减去红色框内的最后加上绿色框内的重合部分即可，用式子来表示即为（下面式子是所查询的矩阵不包含第一行和第一列的情况，若包含同样的利用方块相减的思路）：</p>
+<p>sum[x<sub>2</sub>] [y<sub>2</sub>] - sum[x<sub>2</sub>] [y<sub>1</sub> - 1] - sum[x<sub>1</sub> - 1] [y<sub>2</sub>] + sum[x<sub>1</sub> - 1] [y<sub>1</sub> - 1]</p>
+<img src="/post/%E5%B7%AE%E5%88%86%E5%92%8C%E5%89%8D%E7%BC%80%E5%92%8C/2.png" class title="This is an example image">
+
+<blockquote>
+<p>sum[ i ] [ j ]的值</p>
+</blockquote>
+<ul>
+<li>当i==0且j==0时，sum[ i ] [ j ]=arr[0] [0]</li>
+<li>当i==0且j != 0时，sum[ i ] [ j ]=sum[ i ] [ j-1 ] + arr[ i ] [ j ]</li>
+<li>当i != 0且j==0时，sum[ i ] [ j ]=sum[ i-1 ] [ j ] + arr[ i ] [ j ]</li>
+<li>当i != 0 且j != 0时，sum[ i ] [ j ]=sum[ i ] [ j-1 ]+sum[ i-1 ] [ j ]-sum[ i-1 ] [ j-1 ]+arr[ i ] [ j ]</li>
+</ul>
+<p>下面是演示代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> n = <span class="number">3</span>, m = <span class="number">4</span>;</span><br><span class="line"><span class="type">int</span> arr[n][m] = &#123;</span><br><span class="line">	&#123;<span class="number">1</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>&#125;,</span><br><span class="line">	&#123;<span class="number">9</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">3</span>&#125;,</span><br><span class="line">	&#123;<span class="number">5</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> sum[n][m];</span><br><span class="line"><span class="comment">//sum二维数组的预处理</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pre_sum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	sum[<span class="number">0</span>][<span class="number">0</span>] = arr[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">	<span class="comment">//处理第一列</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; ++i) sum[i][<span class="number">0</span>] = sum[i - <span class="number">1</span>][<span class="number">0</span>] + arr[i][<span class="number">0</span>];</span><br><span class="line">	<span class="comment">//处理第一行</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; m; ++i) sum[<span class="number">0</span>][i] = sum[<span class="number">0</span>][i - <span class="number">1</span>] + arr[<span class="number">0</span>][i];</span><br><span class="line">	<span class="comment">//处理非第一行且非第一列</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; m; ++j)</span><br><span class="line">			sum[i][j] = sum[i][j - <span class="number">1</span>] + sum[i - <span class="number">1</span>][j] - sum[i - <span class="number">1</span>][j - <span class="number">1</span>] + arr[i][j];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//得到所查询矩阵的元素和</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">get_sum</span><span class="params">(<span class="type">int</span> x1, <span class="type">int</span> y1, <span class="type">int</span> x2, <span class="type">int</span> y2)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!x1 &amp;&amp; !y1) <span class="keyword">return</span> sum[x2][y2];</span><br><span class="line">	<span class="keyword">if</span> (!x1) <span class="keyword">return</span> sum[x2][y2] - sum[x2][y1 - <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">if</span> (!y1) <span class="keyword">return</span> sum[x2][y2] - sum[x1 - <span class="number">1</span>][y2];</span><br><span class="line">	<span class="keyword">return</span> sum[x2][y2] - sum[x2][y1 - <span class="number">1</span>] - sum[x1 - <span class="number">1</span>][y2] + sum[x1 - <span class="number">1</span>][y1 - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">	<span class="built_in">pre_sum</span>();</span><br><span class="line">	<span class="comment">//（1，1）和（2，2）构成的矩阵</span></span><br><span class="line">	cout &lt;&lt; <span class="built_in">get_sum</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>) &lt;&lt; endl;<span class="comment">//18</span></span><br><span class="line">	<span class="comment">//（0，1）和（1，3）构成的矩阵</span></span><br><span class="line">	cout &lt;&lt; <span class="built_in">get_sum</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>) &lt;&lt; endl;<span class="comment">//35</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h2><hr>
+<h3 id="一维差分"><a href="#一维差分" class="headerlink" title="一维差分"></a>一维差分</h3><p>差分是一种和前缀和相对的策略，可以当作是求和的逆运算。它可以维护多次对序列的一个区间加上一个数，并在最后询问改变后的序列的数。下面以我们学校OJ平台的一道差分模板题来讲述：</p>
+<img src="/post/%E5%B7%AE%E5%88%86%E5%92%8C%E5%89%8D%E7%BC%80%E5%92%8C/3.png" class title="This is an example image">
+
+<p>对于这道题如果直接就是每次遍历区间再进行加数的处理，那时间复杂度是O(mn)看了一下m、n最大可以达到1e5，那最后的结果肯定会TLE（因为那时我刚开始就是那样做的hhh，那次也是第一次接触差分）</p>
+<p>言归正传，用差分的方法来做这道题，首先定义一个数组arr[N]来存储原始数据，然后还要定义一个数组d[N]。对于数组d的元素，当i==0时，d[i]=arr[i]；当i&gt;=0时，d[i]=arr[i]-arr[i-1]；我们可以发现原数组arr其实是数组d的前缀和，这也是为什么说差分是一种和前缀和相对的策略；当想使区间[L,R]上的数都加上x时，只需要d[L]+=x,d[R+1]-=x即可。因为当d[L]+=x后，对于数组d的更新后的前缀和数组即arr来说，索引&gt;=L的元素都会加上x，而d[R+1]-=x的作用是使得arr数组中索引为&gt;=(R+1)的元素都减去x，那么最后的结果就是区间[L,R]的元素都加上x，这样执行区间修改操作的时间复杂度就只有O(m)</p>
+<p>下面是题目的AC代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100005</span>;</span><br><span class="line">ll n, m, l, r, x, arr[N], d[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		cin &gt;&gt; arr[i];</span><br><span class="line">		d[i] = arr[i] - arr[i - <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (ll i = <span class="number">0</span>; i &lt; m; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		cin &gt;&gt; l &gt;&gt; r &gt;&gt; x;</span><br><span class="line">		d[l] += x;</span><br><span class="line">		d[r + <span class="number">1</span>] -= x;<span class="comment">//一般会把数组开大一点</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//更新后的arr数组</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		arr[i] = arr[i - <span class="number">1</span>] + d[i];</span><br><span class="line">		cout &lt;&lt; arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二维差分"><a href="#二维差分" class="headerlink" title="二维差分"></a>二维差分</h3><p>对于二维差分同样使用二维前缀和的那个例子中的数组来讲述：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr[<span class="number">3</span>][<span class="number">4</span>]=&#123;</span><br><span class="line">    &#123;<span class="number">1</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>&#125;,</span><br><span class="line">    &#123;<span class="number">9</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">3</span>&#125;,</span><br><span class="line">    &#123;<span class="number">5</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>使用二维差分对该数组某个以(x<sub>1</sub>,y<sub>1</sub>)、(x<sub>2</sub>,y<sub>2</sub>)分别为左上角的点和右下角的点构成的矩阵内的元素进行修改，首先定义二维的差分数组d来记录修改（d初始化为0），假设对以(x<sub>1</sub>,y<sub>1</sub>)、(x<sub>2</sub>,y<sub>2</sub>)分别为左上角的点和右下角的点构成的矩阵内的元素同时加上value，那么可以使d[x<sub>1</sub>] [y<sub>1</sub>]+=value，d[x<sub>2</sub>+1] [y<sub>1</sub>]-=value，d[x<sub>1</sub>] [y<sub>2</sub>+1]-=value，d[x<sub>2</sub>+1] [y<sub>2</sub>+1]+=value，然后对二维数组d进行二维前缀和的处理即可得到原数组对应位置元素的改变值，执行d[x<sub>2</sub>+1] [y<sub>2</sub>+1]+=value操作是因为进行前缀和处理时以(x<sub>2</sub>+1,y<sub>2</sub>+1)为左上角顶点的矩阵内的元素被多减去了一个value；结果如下图所示：</p>
+<img src="/post/%E5%B7%AE%E5%88%86%E5%92%8C%E5%89%8D%E7%BC%80%E5%92%8C/4.png" class title="This is an example image">
+
+<p>代码演示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> n = <span class="number">3</span>, m = <span class="number">4</span>;</span><br><span class="line"><span class="type">int</span> arr[n][m] = &#123;</span><br><span class="line">	&#123;<span class="number">1</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>&#125;,</span><br><span class="line">	&#123;<span class="number">9</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">3</span>&#125;,</span><br><span class="line">	&#123;<span class="number">5</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">int</span> d[<span class="number">5</span>][<span class="number">5</span>], sum[<span class="number">5</span>][<span class="number">5</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x1, <span class="type">int</span> y1, <span class="type">int</span> x2, <span class="type">int</span> y2, <span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">	d[x1][y1] += val;</span><br><span class="line">	d[x2 + <span class="number">1</span>][y1] -= val;</span><br><span class="line">	d[x1][y2 + <span class="number">1</span>] -= val;</span><br><span class="line">	d[x2 + <span class="number">1</span>][y2 + <span class="number">1</span>] += val;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//sum二维数组的预处理</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pre_sum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	sum[<span class="number">0</span>][<span class="number">0</span>] = d[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">	<span class="comment">//处理第一列</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; ++i) sum[i][<span class="number">0</span>] = sum[i - <span class="number">1</span>][<span class="number">0</span>] + d[i][<span class="number">0</span>];</span><br><span class="line">	<span class="comment">//处理第一行</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; m; ++i) sum[<span class="number">0</span>][i] = sum[<span class="number">0</span>][i - <span class="number">1</span>] + d[<span class="number">0</span>][i];</span><br><span class="line">	<span class="comment">//处理非第一行且非第一列</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; m; ++j)</span><br><span class="line">			sum[i][j] = sum[i][j - <span class="number">1</span>] + sum[i - <span class="number">1</span>][j] - sum[i - <span class="number">1</span>][j - <span class="number">1</span>] + d[i][j];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将sum数组对应的改变映射会arr数组</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">result</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">			arr[i][j] += sum[i][j];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">	<span class="built_in">add</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>);<span class="comment">//(0,0),(2,1)形成的矩阵内的元素加3</span></span><br><span class="line">	<span class="built_in">add</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">-1</span>);<span class="comment">//(1,1),(2,2)形成的矩阵内的元素减1</span></span><br><span class="line">	<span class="built_in">pre_sum</span>();</span><br><span class="line">	<span class="built_in">result</span>();</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">			cout &lt;&lt; arr[i][j] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="OJ例题"><a href="#OJ例题" class="headerlink" title="OJ例题"></a>OJ例题</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><img src="/post/%E5%B7%AE%E5%88%86%E5%92%8C%E5%89%8D%E7%BC%80%E5%92%8C/5.png" class title="This is an example image">
+
+<h3 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e4</span> + <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n, m, q, flag;</span><br><span class="line"><span class="type">int</span> d1[N], d2[N], d[N], sum[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> l, r;</span><br><span class="line">		cin &gt;&gt; flag &gt;&gt; l &gt;&gt; r;</span><br><span class="line">		<span class="keyword">if</span> (flag == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			d1[l] += <span class="number">1</span>;</span><br><span class="line">			d1[r + <span class="number">1</span>] -= <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			d2[l] += <span class="number">1</span>;</span><br><span class="line">			d2[r + <span class="number">1</span>] -= <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		d1[i] += d1[i - <span class="number">1</span>];</span><br><span class="line">		d2[i] += d2[i - <span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span> (d2[i] &gt;= <span class="number">1</span>)</span><br><span class="line">			d[i] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (d1[i] &gt;= <span class="number">1</span>)</span><br><span class="line">			d[i] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			d[i] = <span class="number">1</span>;</span><br><span class="line">		sum[i] = sum[i - <span class="number">1</span>] + d[i];</span><br><span class="line">	&#125;</span><br><span class="line">	cin &gt;&gt; q;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; q; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> l, r;</span><br><span class="line">		cin &gt;&gt; l &gt;&gt; r;</span><br><span class="line">		cout &lt;&lt; sum[r] - sum[l - <span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>对于前缀和和差分还有其他类型以后待更新……</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://2aurora2.github.io">煎bingo子</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://2aurora2.github.io/post/%E5%B7%AE%E5%88%86%E5%92%8C%E5%89%8D%E7%BC%80%E5%92%8C.html">https://2aurora2.github.io/post/%E5%B7%AE%E5%88%86%E5%92%8C%E5%89%8D%E7%BC%80%E5%92%8C.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://2aurora2.github.io" target="_blank">煎bingo子 の 博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C-C/">C/C++</a><a class="post-meta__tags" href="/tags/algorithm/">algorithm</a></div><div class="post_share"><div class="social-share" data-image="/../img/cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/data_analysis.html"><img class="prev-cover" src="/../img/data.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">数据分析图的绘制</div></div></a></div><div class="next-post pull-right"><a href="/post/exgcd.html"><img class="next-cover" src="/../img/exgcd.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">扩展欧几里得算法(exgcd)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/exgcd.html" title="扩展欧几里得算法(exgcd)"><img class="cover" src="/../img/exgcd.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-24</div><div class="title">扩展欧几里得算法(exgcd)</div></div></a></div><div><a href="/post/C++%E4%B9%8BSTL.html" title="【C++学习】STL基础"><img class="cover" src="/../img/C++STL.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-16</div><div class="title">【C++学习】STL基础</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81Nzg5My8zNDM1Ng=="></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2023 By 煎bingo子</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
+
+if ('Livere' === 'Livere' || !false) {
+  if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><script defer src="/js/universe.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "f2c2e29f-d42a-4e72-9929-745730388f64";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
