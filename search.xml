@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>CTF【Capture The Flag】</title>
+      <link href="/post/CTF.html"/>
+      <url>/post/CTF.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>这里主要记录打CTF比赛过程中学到的东西，WriteUp放在Github仓库，这里可能主要写一些常用方法</p><h2 id="WriteUp地址"><a href="#WriteUp地址" class="headerlink" title="WriteUp地址"></a>WriteUp地址</h2><p><a href="https://github.com/2aurora2/CTF-WriteUp">https://github.com/2aurora2/CTF-WriteUp</a></p><h2 id="工具-方法篇"><a href="#工具-方法篇" class="headerlink" title="工具/方法篇"></a>工具/方法篇</h2><h3 id="求解多元线性方程组"><a href="#求解多元线性方程组" class="headerlink" title="求解多元线性方程组"></a>求解多元线性方程组</h3><p>这个是在学校新生赛碰到的一道逆向题需要求解多个未知数的线性方程组，有挺多方法的，看到wp才发现python有一个z3库可以用来求解。</p><p>这个库不仅可以用来求解线性方程组，还可以用来求解一些约束条件下的可行解，不过这里主要介绍求解线性方程组。</p><blockquote><p>z3-solver库就自行安装，注意名字是z3-solver不是z3</p></blockquote><p><strong>首先对需要求解的变量需要声明类型</strong>，主要有整型(Int)，实型(Real)和向量(BitVec)，以那道逆向题为例需要求解23个未知量的线性方程组，其中未知量均为整数，则声明如下: </p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> z3 <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#  Int创建一个整型变量，Ints创建多个整型变量；其中参数为变量名字的字符串；实型和向量同理</span></span><br><span class="line">x0, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20, x21, x22, x23 = Ints(<span class="string">&#x27;x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 x16 x17 x18 x19 x20 x21 x22 x23&#x27;</span>)</span><br></pre></td></tr></table></figure><p><strong>然后创建一个求解器并添加约束条件</strong>：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">solver = Solver()</span><br><span class="line"></span><br><span class="line">solver.add(</span><br><span class="line">    <span class="number">212</span> * x22 + <span class="number">819</span> * x21 + <span class="number">421</span> * x20 + <span class="number">814</span> * x19 + <span class="number">781</span> * x18 + <span class="number">184</span> * x17 + <span class="number">709</span> * x16 + <span class="number">401</span> * x15 + <span class="number">351</span> * x14 + <span class="number">993</span> * x13 + <span class="number">814</span> * x12 + <span class="number">553</span> * x11 + <span class="number">495</span> * x10 + <span class="number">646</span> * x9 + <span class="number">565</span> * x8 + <span class="number">271</span> * x7 + <span class="number">520</span> * x6 + <span class="number">770</span> * x5 + <span class="number">335</span> * x4 + <span class="number">680</span> * x3 + <span class="number">625</span> * x2 + <span class="number">215</span> * x1 + <span class="number">250</span> * x0 + <span class="number">525</span> * x23 == <span class="number">1173434</span>)</span><br><span class="line"></span><br><span class="line">solver.add(</span><br><span class="line">    <span class="number">909</span> * x22 + <span class="number">819</span> * x21 + <span class="number">404</span> * x20 + <span class="number">323</span> * x19 + <span class="number">961</span> * x18 + <span class="number">625</span> * x17 + <span class="number">630</span> * x16 + <span class="number">760</span> * x15 + <span class="number">781</span> * x14 + <span class="number">353</span> * x13 + <span class="number">207</span> * x12 + <span class="number">363</span> * x11 + <span class="number">126</span> * x10 + <span class="number">569</span> * x9 + <span class="number">279</span> * x8 + <span class="number">988</span> * x7 + <span class="number">115</span> * x6 + <span class="number">815</span> * x5 + <span class="number">598</span> * x4 + <span class="number">186</span> * x3 + <span class="number">795</span> * x2 + <span class="number">744</span> * x1 + <span class="number">371</span> * x0 + <span class="number">354</span> * x23 == <span class="number">1290416</span>)</span><br><span class="line"></span><br><span class="line">…………</span><br></pre></td></tr></table></figure><p><strong>最后检查是否存在解以及输出解的结果：</strong></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(solver.check())      <span class="comment"># 解存在返回sate/sat；反之返回 unsate/unsat</span></span><br><span class="line"><span class="built_in">print</span>(solver.model())     <span class="comment"># 先执行check再执行model可得到解的结果</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 网络安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Express学习】获取请求参数</title>
       <link href="/post/Express_3.html"/>
       <url>/post/Express_3.html</url>
@@ -435,7 +460,7 @@
       
       <categories>
           
-          <category> 生活范畴 </category>
+          <category> 其他范畴 </category>
           
       </categories>
       
