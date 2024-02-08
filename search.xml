@@ -83,35 +83,6 @@
     
     
     <entry>
-      <title>逻辑回归与线性判别分析LDA</title>
-      <link href="/post/logic_and_LDA.html"/>
-      <url>/post/logic_and_LDA.html</url>
-      
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="逻辑回归（Logistic-Regression）"><a href="#逻辑回归（Logistic-Regression）" class="headerlink" title="逻辑回归（Logistic Regression）"></a>逻辑回归（Logistic Regression）</h2><h3 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h3><ol><li><p><strong>逻辑回归</strong>是线性分类器（线性模型）—— 主要用于二分类问题</p></li><li><p>二分类问题给定的条件是：</p><ul><li>分类标签 $Y={0,1}$</li><li>特征自变量 $X={x_1\cdots x_p}$</li></ul></li><li><p>算法过程：</p><ul><li><p>利用<strong>线性回归</strong>求得一个模型使得可以用$X$来预测 $z$：$z=w^TX+b$，这样得到的$z$是一个实数值无法和0/1进行一一对应</p></li><li><p>引入$Sigmoid$函数：<br>$$<br>y=\frac{1}{1+e^{-z}}<br>$$</p></li><li><p>引入$Sigmoid$函数后得到的$y∈(0,1)$，因此将 $y$ 视作$X$作为正例的概率，$1-y$ 视作$X$作为反例的概率</p></li><li><p>结合第一步得到的$z$的表达式可得：<br>$$<br>ln\frac{y}{1-y}=w^TX+b<br>$$</p><p>$$<br>ln\frac{P(Y=1|X)}{P(Y=0|X)}=w^TX+b<br>$$</p><p>$$<br>P(Y=1|X)=\frac{1}{1+e^{-w^TX+b}}<br>$$</p><p>$$<br>P(Y=0|X)=\frac{1}{1+e^{w^TX+b}}<br>$$</p></li><li><p>我们要做的就是训练模型使得当$X$对应类别$1$时使得$P(Y=1|X)&gt;\frac{1}{2}$；当$X$对应类别$0$时使得$P(Y=0|X)&gt;\frac{1}{2}$，即从已知结果出发，去推导出能够获得使对应类别概率更大的结果参数，利用此参数来进行预测分类</p></li></ul></li><li><p><strong>损失函数</strong></p><p>当我们使用误差平方和来当损失函数会发现得到的是一个非凸函数，这就意味着损失函数有着许多的局部最小值，这不利于我们的求解，因此我们采用另一种方式求解：</p><ul><li><p>首先根据前面的算法过程我们可以得到：<br>$$<br>P(Y|X;w^T,b)=(\frac{1}{1+e^{-z}})^Y*(\frac{1}{1+e^z})^{1-Y}<br>$$</p></li><li><p>然后利用<strong>极大似然估计</strong>来根据给定的训练集估计出参数 $w^T和\ b$<br>$$<br>L(w^T,b)=\prod_{i=1}^nP(Y^{(i)}|X^{(i)};w^T,b)<br>$$<br>令：<br>$$<br>\phi(z^{(i)})=\frac{1}{1+e^{-z^{(i)}}}<br>$$</p><p>将两边同时取对数并取反即可得到损失函数：（取反是为了方便求最小损失）<br>$$<br>\mathrm{J}(\mathrm{w^T,b})=-\sum_{\mathrm{i}=1}^{\mathrm{n}} \mathrm{Y}^{(\mathrm{i})} \ln \left(\phi\left(\mathrm{z}^{(\mathrm{i})}\right)\right)+\left(1-\mathrm{Y}^{(\mathrm{i})}\right) \ln \left(1-\phi\left(\mathrm{z}^{(\mathrm{i})}\right)\right)<br>$$</p></li></ul></li></ol><h3 id="算法实战"><a href="#算法实战" class="headerlink" title="算法实战"></a>算法实战</h3><p><a href="https://www.kaggle.com/code/toaurora/logistic-regression/edit/run/131212885">Logistic Regression | Kaggle</a></p><h2 id="线性判别分析LDA"><a href="#线性判别分析LDA" class="headerlink" title="线性判别分析LDA"></a>线性判别分析LDA</h2><h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><p>给定训练样例集，设法将样例投影到一条直线上，使得同样样例的投影尽可能接近、异样样例的投影点尽可能远离；在对新样本进行分类时，将其投影到同样的这条直线上，再根据投影点的位置来确定新样本的类别。其实可以用一句话概括：就是“投影后类内方差最小，类间方差最大”</p><img src="/post/logic_and_LDA/1.png" class title="LDA">]]></content>
-      
-      
-      <categories>
-          
-          <category> 人工智能 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 机器学习 </tag>
-            
-            <tag> 分类 </tag>
-            
-            <tag> 聚类 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>线性回归(linear regression)</title>
       <link href="/post/linear_regression.html"/>
       <url>/post/linear_regression.html</url>
@@ -232,7 +203,7 @@
       
         <tags>
             
-            <tag> WxChatApp </tag>
+            <tag> WeChat Mini Program </tag>
             
         </tags>
       
@@ -372,36 +343,11 @@
     
     
     <entry>
-      <title>vue项目报错合集</title>
-      <link href="/post/vue%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%E5%90%88%E9%9B%86.html"/>
-      <url>/post/vue%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%E5%90%88%E9%9B%86.html</url>
-      
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本博客文章用于记录学习vue时遇到的一些问题报错等等（问题解决参考网上文章，仅作收录）（随时更新ing）</p><h3 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h3><blockquote><p>问题描述</p></blockquote><p>vue项目终端输入npm run serve报错error:03000086:digital envelope routines::initialization error</p><img src="/post/vue%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%E5%90%88%E9%9B%86/1.png" class title="This is an example image"><blockquote><p>原因</p></blockquote><p>node版本太高</p><blockquote><p>解决</p></blockquote><p>在项目根目录下，终端输入以下命令修改环境变量</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$env</span>:NODE_OPTIONS=<span class="string">&quot;--openssl-legacy-provider&quot;</span></span><br></pre></td></tr></table></figure><p>然后再次执行npm run serve即可解决</p><hr><p>有问题欢迎在评论区提出！</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 开发范畴 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> vue </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>博客介绍</title>
       <link href="/post/%E5%8D%9A%E5%AE%A2%E4%BB%8B%E7%BB%8D.html"/>
       <url>/post/%E5%8D%9A%E5%AE%A2%E4%BB%8B%E7%BB%8D.html</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="博客简介"><a href="#博客简介" class="headerlink" title="博客简介"></a>博客简介</h2><p>​    Hello，欢迎来到我的个人博客！这是我博客的第一篇文章，那我就先介绍一下我建立博客的初衷以及博客的技术栈吧！</p><h3 id="建立博客的初衷"><a href="#建立博客的初衷" class="headerlink" title="建立博客的初衷"></a>建立博客的初衷</h3><p>​    起初想的是有一个博客来发一些自己所学的一些东西或者记录自己学习遇到的一些问题方便自己查看，但是自己技术不足一直不得已实现，本来想着在csdn那样的平台上进行记录也不错，但总感觉差一点意思（其实就是感觉有自己的网站比较好😂）但是后面了解到前端、服务器等等这些东西后觉得做个人网站对目前的我来说太遥远了；后来多亏了伟大的大数据在B站给我推了Hexo个人博客框架部署在Github的视频，然后就一直在收藏夹吃灰T_T，刚好前段时间一个朋友给我看了他做的博客，于是心血来潮在这两天断断续续借助<strong>B站视频</strong>和Hexo的<strong>Butterfly主题文档</strong>逐步建立起这个博客。（以下是具体链接）</p><blockquote><p>B站视频：<a href="https://www.bilibili.com/video/BV1aV411p7Bc/?share_source=copy_web">https://www.bilibili.com/video/BV1aV411p7Bc/?share_source=copy_web</a></p><p>Butterfly主题文档：<a href="https://butterfly.js.org/">https://butterfly.js.org/</a></p></blockquote><h3 id="博客技术栈"><a href="#博客技术栈" class="headerlink" title="博客技术栈"></a>博客技术栈</h3><ul><li>Hexo博客框架(Butterfly主题)</li><li>Livere(来必力)评论系统</li><li>PicGo搭建个人图床</li><li>crisp在线聊天系统（右下角处，缺点是可能无法及时回复）</li></ul><h2 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h2><p>​    emmm接下来就简单的进行一下自我介绍吧，本人是一名22级的大一计科专业的学生，接触过C/C++，html，css、js、vue（不过都只是学到一些皮毛），然后参加过CTF比赛、数模，不过目前所参加过比赛大多数都是本着了解的目的去的，然后就是说说未来在博客会写的一些内容：</p><ul><li>首先就是记录学习过程中遇到的一些经典报错的解决</li><li>其次就是记录学习的算法</li><li>然后就是记录一些竞赛会用到的知识……</li><li>以及记录所学的前后端技术的知识</li><li>最后就是可能也许偶尔会写点随笔（当然比较少，毕竟本人的生活没有那么多姿多彩T_T）</li></ul><hr><p>​    本人第一次做博客，可能有所不足，如果以后写的文章有什么错误或者问题可以通过以下联系方式告知（添加请注明来意噢）：</p><div style="width: 50%;margin: auto"><img src="/post/%E5%8D%9A%E5%AE%A2%E4%BB%8B%E7%BB%8D/wechat.jpg" class title="author" alt="s WeChat"></div>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="博客简介"><a href="#博客简介" class="headerlink" title="博客简介"></a>博客简介</h2><p>​    Hello，欢迎来到我的个人博客！这是我博客的第一篇文章，这里简要介绍一下我建立博客的初衷以及博客的技术栈吧！</p><h3 id="建立博客的初衷"><a href="#建立博客的初衷" class="headerlink" title="建立博客的初衷"></a>建立博客的初衷</h3><p>​    起初想的是有一个博客来发一些自己所学的一些东西或者记录自己学习遇到的一些问题方便自己查看，但是后面了解到前端、服务器等等这些东西后觉得做个人网站对目前的我来说太遥远了；后来多亏了伟大的大数据在B站给我推了Hexo个人博客框架部署在Github的视频，然后就一直在收藏夹吃灰T_T，刚好前段时间一个朋友给我看了他做的博客，于是心血来潮在这两天断断续续借助<strong>B站视频</strong>和Hexo的<strong>Butterfly主题文档</strong>逐步建立起这个博客。（以下是具体链接）</p><blockquote><p>B站视频：<a href="https://www.bilibili.com/video/BV1aV411p7Bc/?share_source=copy_web">https://www.bilibili.com/video/BV1aV411p7Bc/?share_source=copy_web</a></p><p>Butterfly主题文档：<a href="https://butterfly.js.org/">https://butterfly.js.org/</a></p></blockquote><h2 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h2><p>​    emmm接下来就简单的一个自我介绍，本人是一名22级的大一计科专业的学生，接触过C/C++，html，css、js、vue（不过都只是学到一些皮毛），然后参加过CTF比赛、数模，不过目前所参加过比赛大多数都是本着了解的目的去的，然后就是说说未来在博客会写的一些内容：</p><ul><li>首先就是记录学习开发、算法、数模、CTF还有其他一些杂七杂八的东西</li><li>然后记录自己的一些学习成果（开发的东西之类的</li><li>最后就是可能也许偶尔会写点随笔</li></ul><hr><p>​    本人第一次做博客，可能有所不足，如果以后写的文章有什么错误或者问题可以通过以下联系方式告知（添加请注明来意噢）：</p><div style="width: 50%;margin: auto"><img src="/post/%E5%8D%9A%E5%AE%A2%E4%BB%8B%E7%BB%8D/wechat.jpg" class title="author" alt="s WeChat"></div>]]></content>
       
       
       <categories>
